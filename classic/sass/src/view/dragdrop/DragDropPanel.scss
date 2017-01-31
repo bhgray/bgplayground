@@ -1,0 +1,36 @@
+.group-source
+  {
+    display: inline-block;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 2px;
+    width: 150px;
+    height: 150px;
+  }
+
+  .group-source-group1
+  {
+    background: #73AD21;
+  }
+  .group-source-group2
+  {
+    background: #FF6347;
+  }
+
+  .group-source-both
+  {
+    background: #FF00FF;
+  }
+
+  .group-target
+  {
+    display: inline-block;
+    border-radius: 25px;
+    border-style: dashed;
+    margin-top:  10px;
+    padding: 20px;
+    margin: 2px;
+    width: 150px;
+    height: 150px;
+
+  }
