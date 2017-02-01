@@ -7,7 +7,7 @@ Ext.define('BGPlayground.view.dragdrop.DragPanelController', {
     // component.  Need to refactor into two ViewControllers one for modern
     // and one for Classic tha each use the appropriate call
     requires: [
-       'Ext.window.Toast'
+    //    'Ext.window.Toast'
    ],
     afterRender: function (view) {
     // debugger;

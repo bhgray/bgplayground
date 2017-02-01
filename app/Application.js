@@ -5,16 +5,18 @@
  */
 Ext.define('BGPlayground.Application', {
     extend: 'Ext.app.Application',
-    
+
     name: 'BGPlayground',
 
     stores: [
-        // TODO: add global / shared stores here
+        'NavigationTree'
     ],
-    
+
     launch: function () {
         // TODO - Launch the application
     },
+
+    mainView: 'BGPlayground.view.main.Main',
 
     onAppUpdate: function () {
         Ext.Msg.confirm('Application Update', 'This application has an update, reload?',

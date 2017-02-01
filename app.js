@@ -9,7 +9,7 @@ Ext.application({
     extend: 'BGPlayground.Application',
 
     requires: [
-        'BGPlayground.view.main.Main'
+        'BGPlayground.*'
     ],
 
     // The name of the initial view to create. With the classic toolkit this class
@@ -17,7 +17,7 @@ Ext.application({
     // modern toolkit, the main view will be added to the Viewport.
     //
     mainView: 'BGPlayground.view.main.Main'
-	
+
     //-------------------------------------------------------------------------
     // Most customizations should be made to BGPlayground.Application. If you need to
     // customize this file, doing so below this section reduces the likelihood

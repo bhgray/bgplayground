@@ -1,16 +1,12 @@
-/**
- * This class is the main view for the application. It is specified in app.js as the
- * "mainView" property. That setting automatically applies the "viewport"
- * plugin causing this view to become the body element (i.e., the viewport).
- *
- */
 Ext.define('BGPlayground.view.main.Main', {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.container.Viewport',
     xtype: 'app-main',
 
     requires: [
-        'Ext.plugin.Viewport',
+        // 'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
+        'Ext.list.Tree',
+        'BGPlayground.store.NavigationTree',
         'BGPlayground.view.main.MainController',
         'BGPlayground.view.main.MainModel',
         'BGPlayground.view.main.MainList',
@@ -20,84 +16,90 @@ Ext.define('BGPlayground.view.main.Main', {
 
     controller: 'main',
     viewModel: 'main',
-
-    ui: 'navigation',
-
-    tabBarHeaderPosition: 1,
-    titleRotation: 0,
-    tabRotation: 0,
-
-    header: {
-        layout: {
-            align: 'stretchmax'
-        },
-        title: {
-            bind: {
-                text: '{name}'
-            },
-            flex: 0
-        },
-        iconCls: 'fa-th-list'
+    itemId:  'mainView',
+    layout: {
+        type: 'vbox',
+        align:'stretch'
+    },
+    listeners: {
+        render:  'onMainViewRender'
     },
 
-    tabBar: {
-        flex: 1,
-        layout: {
-            align: 'stretch',
-            overflowHandler: 'none'
-        }
-    },
-
-    responsiveConfig: {
-        tall: {
-            headerPosition: 'top'
-        },
-        wide: {
-            headerPosition: 'left'
-        }
-    },
-
-    defaults: {
-        bodyPadding: 20,
-        tabConfig: {
-            plugins: 'responsive',
-            responsiveConfig: {
-                wide: {
-                    iconAlign: 'left',
-                    textAlign: 'left'
+    items: [
+        {
+            xtype: 'toolbar',
+            height: 64,
+            itemId:  'headerBar',
+            items: [
+                {
+                    xtype: 'component',
+                    reference: 'havalinalogo',
+                    html: '<div class="main-logo"><img src="resources/images/company-logo.png">Havalina</div>',
+                    width: 250
                 },
-                tall: {
-                    iconAlign: 'top',
-                    textAlign: 'center',
-                    width: 120
+                {
+                    margin: '0 0 0 8',
+                    ui: 'header',
+                    iconCls:'x-fa fa-navicon',
+                    id: 'main-navigation-btn',
+                    handler: 'onToggleNavigationSize'
                 }
-            }
+            ]
+        }, {
+            xtype: 'maincontainerwrap',
+            reference: 'mainContainerWrap',
+            flex: 1,
+            items: [
+                {
+                    xtype: 'treelist',
+                    reference: 'navigationTreeList',
+                    itemId: 'navigationTreeList',
+                    ui: 'navigation',
+                    store: 'NavigationTree',
+                    width: 250,
+                    expanderFirst: false,
+                    expanderOnly: false,
+                    listeners: {
+                        selectionChange: 'onNavigationTreeSelectionChange'
+                    }
+                },
+                {
+                    xtype: 'container',
+                    flex: 1,
+                    reference: 'mainCardPanel',
+                    layout: {
+                        type: 'card',
+                        anchor: '100%'
+                    }
+                }
+            ]
         }
-    },
-    items: [{
-        title: 'Travels',
-        iconCls: 'fa-globe',
-        items: [{
-            xtype: 'mainlist'
-        }]
-    }, {
-        title: 'DragDrop',
-        iconCls: 'fa-arrows',
-        items: [{
-            xtype: 'dragdroppanel'
-        }]
-    }, {
-        title: 'WRTI',
-        iconCls: 'fa-music',
-        items: [{
-            xtype: 'wrtipanel'
-        }]
+    ]
 
-    }, {
-        title: 'Dashboard',
-        iconCls: 'fa-cog',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }]
+    // items: [{
+    //     title: 'Travels',
+    //     iconCls: 'fa-globe',
+    //     items: [{
+    //         xtype: 'mainlist'
+    //     }]
+    // }, {
+    //     title: 'DragDrop',
+    //     iconCls: 'fa-arrows',
+    //     items: [{
+    //         xtype: 'dragdroppanel'
+    //     }]
+    // }, {
+    //     title: 'WRTI',
+    //     iconCls: 'fa-music',
+    //     items: [{
+    //         xtype: 'wrtipanel'
+    //     }]
+    //
+    // }, {
+    //     title: 'Dashboard',
+    //     iconCls: 'fa-cog',
+    //     bind: {
+    //         html: '{loremIpsum}'
+    //     }
+    // }]
 });
